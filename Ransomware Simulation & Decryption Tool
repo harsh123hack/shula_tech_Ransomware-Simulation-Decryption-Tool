@@ -1,0 +1,19 @@
+from cryptography.fernet import Fernet
+
+# Generate a key for encryption and decryption
+key = Fernet.generate_key()
+cipher_suite = Fernet(key)
+
+# Encrypt a file
+with open('example.txt', 'rb') as file:
+    file_data = file.read()
+    encrypted_data = cipher_suite.encrypt(file_data)
+    with open('example.txt', 'wb') as file:
+        file.write(encrypted_data)
+
+# Decrypt the file
+with open('example.txt', 'rb') as file:
+    encrypted_data = file.read()
+    decrypted_data = cipher_suite.decrypt(encrypted_data)
+    with open('example.txt', 'wb') as file:
+        file.write(decrypted_data)
